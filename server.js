@@ -56,12 +56,7 @@ orvibo.startServer();
 
 app.get('/', (req, res) => {
     let sockets = orvibo.getConnectedSocket();
-
-    const q = req.query
-    if (q.uid != undefined) {
-        orvibo.toggleSocket(q.uid);
-    }
-
+    
     sockets.forEach(socket => {
         switch(socket.state) {
             case 1:
@@ -73,6 +68,11 @@ app.get('/', (req, res) => {
             default:
           }
     });
+
+    const q = req.query
+    if (q.uid != undefined) {
+        orvibo.toggleSocket(q.uid);
+    }
 
     res.render('index', {
         title: 'Orvibo b25 Server',
