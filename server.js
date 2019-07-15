@@ -1,6 +1,4 @@
 const Orvibo = require('./server/utils/Orvibo');
-const http = require('http');
-const url = require('url');
 const express = require('express');
 const app = express();
 
