@@ -2,11 +2,13 @@ extends default
 
 block content
   div.container
-    each modelId in sockets
-      div.person
-        h2.person-name
-          | #{modelId.name} 
-        h2.person-name2  
-          | #{modelId.uid}
-        a(href=`/?uid=${modelId.uid}`)
+    each socket in sockets
+      div.socket
+        h2.socket-name
+          | #{socket.name} 
+        h2.socket-name2  
+          | #{socket.uid}
+        h2.socket-name2  
+          | #{socket.status}
+        a(href=`/?uid=${socket.uid}`)
           | Toggle

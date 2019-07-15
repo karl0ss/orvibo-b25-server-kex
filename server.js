@@ -59,7 +59,24 @@ orvibo.startServer();
 
 app.get('/', (req, res) => {
     let sockets = orvibo.getConnectedSocket();
-    
+
+    const q = req.query
+    if (q.uid != null) {
+        orvibo.toggleSocket(q.uid);
+    }
+
+    sockets.forEach(socket => {
+        switch(socket.state) {
+            case 1:
+              socket.status = 'off'
+              break;
+            case 0:
+              socket.status = 'on'
+            break;
+            default:
+          }
+    });
+
     res.render('index', {
         title: 'Orvibo b25 Server',
         sockets

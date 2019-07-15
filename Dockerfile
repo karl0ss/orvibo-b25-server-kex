@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3000 10001
 
-CMD [ "node", "Docker.js" ]
+CMD [ "node", "server.js" ]
