@@ -5,7 +5,7 @@ const app = express();
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/server'));
 
-const createArray = str => {
+const plugArray = str => {
     const arr = str.split(',');
     const pairs = [];
     for (let i=0; i<arr.length; i+=2) {
@@ -21,7 +21,7 @@ const settings = {
     LOG_PACKET: true, //Show incoming packet data from the socket
     ORVIBO_KEY: process.env.orviboPK,
     plugInfo : 
-        createArray(process.env.plugArray)
+        plugArray(process.env.plugArray)
     ,
 };
 let orvibo = new Orvibo(settings);
@@ -58,7 +58,7 @@ app.get('/', (req, res) => {
     let sockets = orvibo.getConnectedSocket();
 
     const q = req.query
-    if (q.uid != null) {
+    if (q.uid != undefined) {
         orvibo.toggleSocket(q.uid);
     }
 
