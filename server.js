@@ -6,9 +6,7 @@ app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 
 const createArray = str => {
-    // split on each comma
     const arr = str.split(',');
-    // put back elements by pairs
     const pairs = [];
     for (let i=0; i<arr.length; i+=2) {
       let o = {};
@@ -19,7 +17,6 @@ const createArray = str => {
     return pairs;
   }
 
-// Create a settings object to pass PK key and map sockets to names
 const settings = {
     LOG_PACKET: true, //Show incoming packet data from the socket
     ORVIBO_KEY: process.env.orviboPK,
@@ -86,11 +83,3 @@ app.get('/', (req, res) => {
 const server = app.listen(3000, () => {
     console.log(`Express running → PORT ${server.address().port}`);
   });
-
-
-// const requestHandler = (request, response) => {
-//     response.writeHead(200, {'Content-Type': 'application/json'});
-//     let q = url.parse(request.url, true).query;
-//     if (q.uid != null) {
-//         orvibo.toggleSocket(q.uid);
-//     }
