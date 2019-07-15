@@ -1,8 +1,11 @@
-const Orvibo = require('./Orvibo');
+const Orvibo = require('./server/utils/Orvibo');
 const http = require('http');
 const url = require('url');
+const express = require('express');
+const app = express();
 
-const httpPort = 3000;
+app.set('view engine', 'pug');
+app.use(express.static(__dirname + '/public'));
 
 const createArray = str => {
     // split on each comma
@@ -53,32 +56,26 @@ orvibo.on('plugDisconnectedWithError', ({uid, name }) => {
 });
 
 
-
 // Start the Orvibo socket server
 orvibo.startServer();
 
-// Create a basic example HTTP server
-// If there are no parameters it will return the uid, state, modelId and name of the socket
-// You can then use the uid to toggle the state of the switch like
-// http://localhost:3000?uid=5dcf7ff76e7a
-
-const requestHandler = (request, response) => {
-    response.writeHead(200, {'Content-Type': 'application/json'});
-    let q = url.parse(request.url, true).query;
-    if (q.uid != null) {
-        orvibo.toggleSocket(q.uid);
-    }
-
-    // Get all currently connected sockets, their names and states
+app.get('/', (req, res) => {
     let sockets = orvibo.getConnectedSocket();
-    response.end(JSON.stringify(sockets));
-};
-
-const httpServer = http.createServer(requestHandler);
-
-httpServer.listen(httpPort, (err) => {
-    if (err) {
-        return console.log('something bad happened', err)
-    }
-    console.log(`http server is listening on ${httpPort}`)
+    
+    res.render('index', {
+        title: 'Orvibo b25 Server',
+        sockets
+    })
 });
+
+const server = app.listen(3000, () => {
+    console.log(`Express running → PORT ${server.address().port}`);
+  });
+
+
+// const requestHandler = (request, response) => {
+//     response.writeHead(200, {'Content-Type': 'application/json'});
+//     let q = url.parse(request.url, true).query;
+//     if (q.uid != null) {
+//         orvibo.toggleSocket(q.uid);
+//     }
