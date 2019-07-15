@@ -6,9 +6,9 @@ block content
       div.socket
         h2.socket-name
           | #{socket.name} 
-        h2.socket-name2  
+        h2.socket-name  
           | #{socket.uid}
-        h2.socket-name2  
+        h2.socket-name  
           | #{socket.status}
-        a(href=`/?uid=${socket.uid}`)
+        a.button(href=`/?uid=${socket.uid}`)
           | Toggle

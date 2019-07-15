@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 app.set('view engine', 'pug');
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/server'));
 
 const createArray = str => {
     const arr = str.split(',');
