@@ -1,100 +1,36 @@
 
-# Orvibo B25 Smart Socket Server
+# Orvibo B25 Smart Socket Server (Kex)
 
-  
+A server to control the B25 range of wifi Smart Sockets.
 
-A server to control the B25 range of wifi Smart Sockets
+This server was largely based on the work done by [Sandy Milne](https://github.com/sandysound).
 
-  
-
-While building a home automation system I bought a couple of Orvibo smart sockets from ebay that were advertised as the S20 model.
-
-When they arrived they were actually the B25 (AUS) version and I could not find any node libraries to control them.
-
-  
-
-After a bit of searching, reading research by other people and some time with Wireshark I manged to setup
-
-a relay server that would decrypt the packets going back and forth between the sockets and the server and worked out the protocol.
-
-  
-
-After that I created this project which is basically a server that the Orvibo sockets connect to instead of the actual one.
-
-Once the sockets have connected you can toggle them on and off
-
-  
 
 ## Getting Started
 
-  
-
-To run this server you will need to have Node.js installed. I run v6.11.0 but it may work with earlier versions.
+To run this server you will need to have Node.js installed. I run v11.
 
   
-
 You will need to add the Orvibo PK key to decrypt and encrypt the initial packets.
 
 You can find this using helpful bash script from Grayda [getKey.sh](https://gist.github.com/Grayda/eb48093bcfb96bfeec9c58ea301f2668) (you may have to add www to to url to make it work)
 
-  
 
 Once you have this key you will need to add it the ``OrviboSettings.js`` file or you can pass it into as part of the settings object when you create the orvibo server object.
 
-  
 
 For each socket on your network you will need to add its MAC address (colons removed and lower cased) to the plugInfo array as a uid and give it a name field for easier identification.
 
-  
-
-You can see this in the Example.js file
-
-```
-
-// Create a settings object to pass PK key and map sockets to names
-
-const settings = {
-
-LOG_PACKET: false, //Show incoming packet data from the socket
-
-ORVIBO_KEY: '', // put your PK key here as plain text (See Readme)
-
-plugInfo : [
-
-// Add uid and a name so you can easily identify the connected sockets
-
-{
-
-uid :'53dd7fe74de7',
-
-name: "Lamp in Kitchen"
-
-},
-
-],
-
-};
-
-  
-
-let orvibo = new Orvibo(settings);
-
-```
-
-  
 
 Because these new sockets don't use UDP packets to communicate like the older versions you will also need to redirect all traffic from the host name ``homemate.orvibo.com``
 
 on TCP port 10001 the computer running the server.
-
   
 
 I used an Ubuntu machine running dnsmasq and set this server as my DNS server in my router but depending on your network you might have to do it differently. Most routers will let you modify your DNS settings under the WAN settings.
-
   
 
 Make sure to set a static IP address to the computer that will be running the Ubuntu server (In following example, the ip of machine running this server is at 192.168.0.106)
-
   
 
 ```
@@ -105,69 +41,33 @@ address=/homemate.orvibo.com/192.168.0.106
 
 ```
 
-  
-
 To confirm your dnsmasq is working, when visiting ``homemate.orvibo.com:10001`` from your browser the server should return a response.
 
-  
-
 You will know things are working when you hit the server in your browser (for Example.js this would be ``http://localhost:3000``) and start seeing your sockets in the array.
-
-  
 
 Just a note: If you try to add a socket after you've redirected the DNS you will be ale to setup WiFi and use it with this library but your phone will probably timeout when trying to add the device
 
 to the official Orvibo server.
 
-  
-
-### Installing
-
-  
+### Installing  
 
 From Github
 
-  
 
 Clone the repo and then run
 
 ```
-
 npm install
 
 ```
 
-to install the dependencies (buffer-crc32)
-
-  
-
-or from npm just run
-
-  
-
-```
-
-npm i orvibo-b25-server
-
-```
-
-  
-  
+to install the dependencies
 
 ### Usage
 
-  
-
-The best way to see how to use this library is to see ``Example.js``
-
-  
-
-To start the example http server run
-
-  
+To start the server run
 
 ```
-
 npm start
 
 ```
