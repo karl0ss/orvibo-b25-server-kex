@@ -61,10 +61,10 @@ app.get('/', (req, res) => {
     sockets.forEach(socket => {
         switch(socket.state) {
             case 1:
-              socket.state = 'off'
+              socket.state = 'OFF'
               break;
             case 0:
-              socket.state = 'on'
+              socket.state = 'ON'
             break;
             default:
           }
