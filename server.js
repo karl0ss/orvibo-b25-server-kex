@@ -1,27 +1,16 @@
 const Orvibo = require('./server/utils/Orvibo');
+const utils = require('./server/utils/Utils')
 const express = require('express');
 const app = express();
 
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/server'));
 
-const plugArray = str => {
-    const arr = str.split(',');
-    const pairs = [];
-    for (let i=0; i<arr.length; i+=2) {
-      let o = {};
-      o.uid = arr[i].split(':')[1];
-      o.name = arr[i+1].split(':')[1];
-      pairs.push(o);
-    }
-    return pairs;
-  }
-
 const settings = {
     LOG_PACKET: true, //Show incoming packet data from the socket
     ORVIBO_KEY: process.env.orviboPK,
     plugInfo : 
-        plugArray(process.env.plugArray)
+        utils.generatePlugArray(process.env.plugArray)
     ,
 };
 let orvibo = new Orvibo(settings);

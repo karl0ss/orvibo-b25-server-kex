@@ -25,3 +25,14 @@ module.exports.generateRandomNumber = function(length) {
     return parseInt(result);
 };
 
+module.exports.generatePlugArray = function(str) {
+        const arr = str.split(',');
+        const pairs = [];
+        for (let i=0; i<arr.length; i+=2) {
+          let o = {};
+          o.uid = arr[i].split(':')[1];
+          o.name = arr[i+1].split(':')[1];
+          pairs.push(o);
+        }
+        return pairs;
+      }    
