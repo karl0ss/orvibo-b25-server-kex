@@ -36,3 +36,26 @@ module.exports.generatePlugArray = function(str) {
         }
         return pairs;
       }    
+
+module.exports.sleep = function(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+      if ((new Date().getTime() - start) > milliseconds){
+        break;
+      }
+    }
+  }      
+
+module.exports.setState = function(sockets) {
+    sockets.forEach(socket => {
+        switch(socket.state) {
+            case 1:
+              socket.state = 'OFF'
+              break;
+            case 0:
+              socket.state = 'ON'
+            break;
+            default:
+          }
+    });
+}  

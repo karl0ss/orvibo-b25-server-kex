@@ -44,25 +44,16 @@ orvibo.on('plugDisconnectedWithError', ({uid, name }) => {
 orvibo.startServer();
 
 app.get('/', (req, res) => {
-    // let sockets = orvibo.getConnectedSocket();
-    let sockets = [{name: "Plug1", state: 1, uid: "222222"},{name: "Plug2", state: 0, uid: "111111"}]
+    let sockets = orvibo.getConnectedSocket();
+    // let sockets = [{name: "Plug1", state: 1, uid: "222222"},{name: "Plug2", state: 0, uid: "111111"}]
     
-    sockets.forEach(socket => {
-        switch(socket.state) {
-            case 1:
-              socket.state = 'OFF'
-              break;
-            case 0:
-              socket.state = 'ON'
-            break;
-            default:
-          }
-    });
-
-    const q = req.query
-    if (q.uid != undefined) {
-        orvibo.toggleSocket(q.uid);
+    if (req.query.uid != undefined) {
+        orvibo.toggleSocket(req.query.uid);
     }
+
+    sockets = orvibo.getConnectedSocket();
+
+    utils.setState(sockets)
 
     res.render('index', {
         title: 'Orvibo b25 Server',
