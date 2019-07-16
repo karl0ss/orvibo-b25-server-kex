@@ -55,15 +55,16 @@ orvibo.on('plugDisconnectedWithError', ({uid, name }) => {
 orvibo.startServer();
 
 app.get('/', (req, res) => {
-    let sockets = orvibo.getConnectedSocket();
+    // let sockets = orvibo.getConnectedSocket();
+    let sockets = [{name: "Plug1", state: 1, uid: "222222"},{name: "Plug2", state: 0, uid: "111111"}]
     
     sockets.forEach(socket => {
         switch(socket.state) {
             case 1:
-              socket.status = 'off'
+              socket.state = 'off'
               break;
             case 0:
-              socket.status = 'on'
+              socket.state = 'on'
             break;
             default:
           }
