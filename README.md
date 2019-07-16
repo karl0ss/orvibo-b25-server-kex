@@ -12,7 +12,6 @@ This server was largely based on the work done by [Sandy Milne](https://github.c
 To run this server you will need to have Node.js installed. I run v11.
 
 You will need to add the Orvibo PK key to decrypt and encrypt the initial packets.
-
 You can find this using helpful bash script from Grayda [getKey.sh](https://gist.github.com/Grayda/eb48093bcfb96bfeec9c58ea301f2668) (you may have to add www to to url to make it work)
 
 Once you have this key you will need to add it the ``OrviboSettings.js`` file or you can pass it into as part of the settings object when you create the orvibo server object.
@@ -20,7 +19,6 @@ Once you have this key you will need to add it the ``OrviboSettings.js`` file or
 For each socket on your network you will need to add its MAC address (colons removed and lower cased) to the plugInfo array as a uid and give it a name field for easier identification.
 
 Because these new sockets don't use UDP packets to communicate like the older versions you will also need to redirect all traffic from the host name ``homemate.orvibo.com``
-
 on TCP port 10001 the computer running the server.
 
 I used an Ubuntu machine running dnsmasq and set this server as my DNS server in my router but depending on your network you might have to do it differently. Most routers will let you modify your DNS settings under the WAN settings.
@@ -58,7 +56,6 @@ Easiest way to use this is to run it in a docker container.
 PK and PlugArray can be passed in via enviroment variables.
 
 - orviboPK = 'xxxxx'
-
 - plugArray = 'uid:MACADDRESS,name:PRINTERNAME'
 
 Example run command -
