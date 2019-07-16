@@ -1,0 +1,16 @@
+extends default
+
+block content
+  div.container
+    each socket in sockets
+      div.socket
+        h2.socket-name
+          | #{socket.name} 
+        h2.socket-name  
+          | #{socket.uid}
+        if socket.state === 'OFF'
+          a.button-off(href=`/?uid=${socket.uid}`)
+            | #{socket.state}
+        else 
+          a.button-on(href=`/?uid=${socket.uid}`)
+            | #{socket.state}
