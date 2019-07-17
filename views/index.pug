@@ -8,6 +8,13 @@ block content
     else
       each socket in sockets
         div.socket
+          case socket.modelId
+            when 'f8b11bed724647e98bd07a66dca6d5b6'
+              div.socket-image(style=`background: url('/images/b25UK.jpg') top center
+              no-repeat; background-size: cover;`)
+            when '123'
+              div.socket-image(style=`background: url('/images/b25.jpg') top center
+              no-repeat; background-size: cover;`)  
           h2.socket-name
             | #{socket.name} 
           h2.socket-name  

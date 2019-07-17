@@ -36,6 +36,12 @@ body {
   margin-bottom: 5px;
 }
 
+.socket-image {
+	width: 100%;
+	height: 300px;
+  }
+  
+
 .button-off {
 	background-color:#fc0000;
 	-moz-border-radius:28px;
