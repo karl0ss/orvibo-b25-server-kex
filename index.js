@@ -45,7 +45,7 @@ orvibo.startServer();
 
 app.get('/', (req, res) => {
     let sockets = orvibo.getConnectedSocket();
-    // let sockets = [{name: "Plug1", state: 1, uid: "222222"},{name: "Plug2", state: 0, uid: "111111"}]
+    // let sockets = [{name: "Plug1", state: 1, uid: "222222", modelId: "f8b11bed724647e98bd07a66dca6d5b6"},{name: "Plug2", state: 0, uid: "111111",  modelId: "f8b11bed724647e98bd07a66dca6d5b6"}]
     
     if (req.query.uid != undefined) {
         orvibo.toggleSocket(req.query.uid);
