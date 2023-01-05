@@ -1,3 +1,6 @@
+
+# Project Abandoned - but still works!
+
 # Orvibo B25 Smart Socket Server (Kex)
 
  A server to control the B25 range of wifi Smart Sockets. 
